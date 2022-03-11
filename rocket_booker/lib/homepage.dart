@@ -1,10 +1,9 @@
-import 'dart:ui';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rocket_booker/services/authentication.dart';
 import 'package:rocket_booker/userbased/ProfilePage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'info_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,27 +22,32 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Home'),
       ),
       body: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                child: const Text('Profile'),
-                onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>  ProfilePage(user: Authentication.getCurrentUser(),)),);
-                  },
-              ),
-              ElevatedButton(
-                child: const Text('Information'),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage()));
-                },
-              ),
-            ],
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          ElevatedButton(
+            child: const Text('Profile'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfilePage(
+                          user: Authentication.getCurrentUser(),
+                        )),
+              );
+            },
           ),
+          ElevatedButton(
+            child: const Text('Information'),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => InfoPage()));
+            },
+          ),
+        ],
+      ),
     );
   }
 }
-
-
 
 //
 // class HomePage extends StatelessWidget {
@@ -77,5 +80,3 @@ class _HomePageState extends State<HomePage> {
 //
 //
 //
-
-
