@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: ElevatedButton(
-          child: const Text('Open route'),
+          child: const Text('Profile'),
         onPressed: () {
         Navigator.push(
         context,
