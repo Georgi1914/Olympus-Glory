@@ -5,6 +5,7 @@ import 'validation.dart';
 import 'package:rocket_booker/services/authentication.dart';
 import 'RegisterPage.dart';
 import 'ProfilePage.dart';
+import 'package:rocket_booker/homepage.dart';
 
 class loginPage extends StatefulWidget {
   const loginPage({Key? key}) : super(key: key);
@@ -26,9 +27,7 @@ class _loginPageState extends State<loginPage> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => ProfilePage(
-            user: user,
-          ),
+          builder: (context) => HomePage(),
         ),
       );
     }
@@ -77,7 +76,7 @@ class _loginPageState extends State<loginPage> {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      ProfilePage(user: user)),
+                                      HomePage())
                             );
                           } else {
                             print("not verified");
