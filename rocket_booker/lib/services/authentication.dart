@@ -17,6 +17,7 @@ class Authentication {
       user = userCredential.user;
       await user!.updateDisplayName(name);
       await user.reload();
+      await user.sendEmailVerification();
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
