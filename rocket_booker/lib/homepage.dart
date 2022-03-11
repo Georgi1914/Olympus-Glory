@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rocket_booker/services/authentication.dart';
 import 'package:rocket_booker/userbased/ProfilePage.dart';
-import 'reviews_page.dart';
+
 import 'info_page.dart';
+import 'reviews/reviews_page.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
@@ -46,8 +47,8 @@ class _HomePageState extends State<HomePage> {
           ElevatedButton(
             child: const Text('Reviews'),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) =>ReviewsPage ()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ReviewsPage()));
             },
           ),
         ],

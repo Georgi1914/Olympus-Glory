@@ -10,6 +10,13 @@ class ReviewsPage extends StatefulWidget {
 class _ReviewsPageState extends State<ReviewsPage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Reviews'),
+      ),
+      body: Column(
+        children: [],
+      ),
+    );
   }
 }
