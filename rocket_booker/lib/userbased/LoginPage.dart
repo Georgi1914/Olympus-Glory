@@ -39,88 +39,134 @@ class _loginPageState extends State<loginPage> {
   Widget build(BuildContext context) {
     // _initializeFirebase();
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Login Page"),
-        ),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _emailTextController,
-                // focusNode: _focusEmail,
-                validator: (value) =>
-                    Validator.validateEmail(email: value as String),
-              ),
-              SizedBox(height: 8.0),
-              TextFormField(
-                controller: _passwordTextController,
-                // focusNode: _focusPassword,
-                obscureText: true,
-                validator: (value) =>
-                    Validator.validatePassword(password: value as String),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        try {
-                          if (_formKey.currentState!.validate()) {
-                            User? user =
-                                await Authentication.signInUsingEmailPassword(
-                              email: _emailTextController.text,
-                              password: _passwordTextController.text,
-                              context: context,
-                            );
-                            if (user != null && user.emailVerified) {
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) => HomePage(user: Authentication.getCurrentUser(),)));
+        body: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/Space.jpg"),
+                fit: BoxFit.cover),
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, color: Colors.deepPurple[800], fontWeight: FontWeight.bold),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.deepPurple[800]?.withAlpha(100), fontSize: 20, fontWeight: FontWeight.bold),
+                        hintText: "Enter your email",
+                        fillColor: Colors.white,
+                    ),
+                    controller: _emailTextController,
+                    // focusNode: _focusEmail,
+                    validator: (value) =>
+                        Validator.validateEmail(email: value as String),
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                  child: TextFormField(
+                    style: TextStyle(fontSize: 20, color: Colors.deepPurple[800], fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                      hintStyle: TextStyle(color: Colors.deepPurple[800]?.withAlpha(100), fontSize: 20, fontWeight: FontWeight.bold),
+                      hintText: "Enter your password",
+                      fillColor: Colors.white,
+                    ),
+                    controller: _passwordTextController,
+                    // focusNode: _focusPassword,
+                    obscureText: true,
+                    validator: (value) =>
+                        Validator.validatePassword(password: value as String),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 20, 8, 5),
+                  child: Expanded(
+                    child: SizedBox(
+                      width: 230,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
+                        onPressed: () async {
+                          try {
+                            if (_formKey.currentState!.validate()) {
+                              User? user =
+                              await Authentication.signInUsingEmailPassword(
+                                email: _emailTextController.text,
+                                password: _passwordTextController.text,
+                                context: context,
+                              );
+                              if (user != null && user.emailVerified) {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage(user: Authentication.getCurrentUser(),)));
+                              }
                             }
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'weak-password') {
+                              setState(() {
+                                _loginMessage =
+                                'The password provided is too weak.';
+                              });
+                            } else if (e.code == 'email-already-in-use') {
+                              setState(() {
+                                _loginMessage =
+                                'The account already exists for that email.';
+                              });
+                            }
+                          } catch (e) {
+                            print(e);
                           }
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'weak-password') {
-                            setState(() {
-                              _loginMessage =
-                                  'The password provided is too weak.';
-                            });
-                          } else if (e.code == 'email-already-in-use') {
-                            setState(() {
-                              _loginMessage =
-                                  'The account already exists for that email.';
-                            });
-                          }
-                        } catch (e) {
-                          print(e);
-                        }
-                      },
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(color: Colors.white),
+                        },
+
+
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => RegisterPage()),
-                        );
-                      },
-                      child: Text(
-                        'Register',
-                        style: TextStyle(color: Colors.white),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: Expanded(
+                    child: SizedBox(
+                      width: 230,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => RegisterPage()),
+                          );
+                        },
+                        child: Text(
+                          'Register',
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-              Text(_loginMessage),
-            ],
+                ),
+                Text(_loginMessage),
+              ],
+            ),
           ),
         ));
   }
 }
+
