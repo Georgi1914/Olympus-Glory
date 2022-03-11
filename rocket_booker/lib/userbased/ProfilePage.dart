@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'LoginPage.dart';
 
 class ProfilePage extends StatefulWidget {
   final User user;
@@ -54,6 +55,17 @@ class _ProfilePageState extends State<ProfilePage> {
                         .bodyText1!
                         .copyWith(color: Colors.red),
                   ),
+            ElevatedButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => loginPage(),
+                    ),
+                  );
+                },
+                child: Text('Sign out'))
             // Add widgets for verifying email
             // and, signing out the user
           ],

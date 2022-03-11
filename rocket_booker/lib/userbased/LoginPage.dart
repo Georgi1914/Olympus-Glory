@@ -20,9 +20,24 @@ class _loginPageState extends State<loginPage> {
 
   // FocusNode _focusEmail = FocusNode();
   // FocusNode _focusPassword = FocusNode();
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ProfilePage(
+            user: user,
+          ),
+        ),
+      );
+    }
+    return firebaseApp;
+  }
 
   @override
   Widget build(BuildContext context) {
+    _initializeFirebase();
     return Scaffold(
         appBar: AppBar(
           title: Text("Login Page"),
