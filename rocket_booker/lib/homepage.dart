@@ -5,6 +5,7 @@ import 'package:rocket_booker/services/authentication.dart';
 import 'package:rocket_booker/userbased/ProfilePage.dart';
 import 'reviews_page.dart';
 import 'info_page.dart';
+import 'package:rocket_booker/destinations/destinationsPage.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
@@ -50,6 +51,14 @@ class _HomePageState extends State<HomePage> {
                   context, MaterialPageRoute(builder: (context) =>ReviewsPage ()));
             },
           ),
+
+          ElevatedButton(
+            child: const Text('Book a flight'),
+            onPressed: () {
+              Navigator.push(
+              context, MaterialPageRoute(builder: (context) => destinationsPage()));
+            },
+          )
         ],
       ),
     );
