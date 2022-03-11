@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rocket_booker/destinations/TemplateCard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SpacePorts extends StatefulWidget {
   const SpacePorts({Key? key}) : super(key: key);
@@ -9,25 +10,49 @@ class SpacePorts extends StatefulWidget {
 }
 
 class _SpacePortsState extends State<SpacePorts> {
-  List<Card> cardList = [];
-  TemplateCard moscow = TemplateCard(destination: 'Moscow', travelTime: '', imageName: '');
-  TemplateCard tokyo = TemplateCard(destination: 'Tokyo', travelTime: '', imageName: '');
-  TemplateCard plovdiv = TemplateCard(destination: 'Plovdiv', travelTime: '', imageName: '');
+  List<TemplateCard> cardList = [];
+  Stream<QuerySnapshot> _SpacePorts = FirebaseFirestore.instance
+      .collection('Destinations')
+      .doc('Mars')
+      .collection('SpacePort')
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
-    cardList.add(moscow.createTemplateCard());
-    cardList.add(tokyo.createTemplateCard());
-    cardList.add(plovdiv.createTemplateCard());
     return Scaffold(
       appBar: AppBar(
         title: Text("SpacePorts"),
       ),
-      body: ListView.builder(
-          itemCount: cardList.length,
-          itemBuilder: (context, index) {
-            return cardList[index];
-          }),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _SpacePorts,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+          final docs = snapshot.data!.docs;
+
+          return ListView.builder(
+            itemCount: docs.length,
+            itemBuilder: (context, i) {
+              TemplateCard newCard = TemplateCard(
+                  destination: docs[i].id,
+                  travelTime: '',
+                  imageName: 'Moon.jpg');
+              cardList.add(newCard);
+
+              return Column(
+                children: [
+                  cardList[i].createTemplateCard(),
+                ],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

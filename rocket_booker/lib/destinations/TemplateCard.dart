@@ -4,8 +4,10 @@ class TemplateCard {
   late String destination;
   late String travelTime;
   late String imageName;
-
-  TemplateCard({required this.destination, required this.travelTime, required this.imageName});
+  TemplateCard(
+      {required this.destination,
+      required this.travelTime,
+      required this.imageName});
 
   Card createTemplateCard() {
     return Card(
@@ -28,19 +30,15 @@ class TemplateCard {
                 backgroundColor: Colors.white,
                 radius: 40,
               ),
-              title: Text(
-                  destination,
-                  style: const TextStyle(
-                    fontSize: 50
-                  )              ),
-              subtitle: Text(
-                  travelTime,
+              title: Text(destination, style: const TextStyle(fontSize: 50)),
+              subtitle: Text(travelTime,
                   style: const TextStyle(
                     fontSize: 25,
-                  )
-              ),
+                  )),
             ),
-            SizedBox(height: 50,)
+            SizedBox(
+              height: 50,
+            )
           ],
         ),
       ),
