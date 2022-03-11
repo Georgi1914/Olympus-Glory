@@ -58,12 +58,14 @@ class _loginPageState extends State<loginPage> {
                             password: _passwordTextController.text,
                             context: context,
                           );
-                          if (user != null) {
+                          if (user != null && user.emailVerified) {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                   builder: (context) =>
                                       ProfilePage(user: user)),
                             );
+                          } else {
+                            print("not verified");
                           }
                         }
                       },
