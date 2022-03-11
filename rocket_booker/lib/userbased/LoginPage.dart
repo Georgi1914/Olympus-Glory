@@ -77,7 +77,7 @@ class _loginPageState extends State<loginPage> {
                             if (user != null && user.emailVerified) {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => HomePage()));
+                                      builder: (context) => HomePage(user: Authentication.getCurrentUser(),)));
                             }
                           }
                         } on FirebaseAuthException catch (e) {

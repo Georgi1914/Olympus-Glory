@@ -40,10 +40,10 @@ class Authentication {
     return user;
   }
 
-  static Future<User?> getCurrentUser() async {
+  static User getCurrentUser()  {
     FirebaseAuth auth = FirebaseAuth.instance;
-    User? user;
-    user = auth.currentUser;
+    User user;
+    user = auth.currentUser as User;
     return user;
   }
 }
