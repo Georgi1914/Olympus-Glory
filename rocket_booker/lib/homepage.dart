@@ -3,13 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rocket_booker/services/authentication.dart';
 import 'package:rocket_booker/userbased/ProfilePage.dart';
-
 import 'info_page.dart';
-<<<<<<< HEAD
 import 'reviews/reviews_page.dart';
-=======
 import 'package:rocket_booker/destinations/destinationsPage.dart';
->>>>>>> 60d8eb375a228c15a9f578614220853171bda4c1
+
 
 class HomePage extends StatefulWidget {
   final User user;
@@ -27,9 +24,12 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Home'),
       ),
       body: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment : CrossAxisAlignment.end,
         children: [
+          
           ElevatedButton(
+
             child: const Text('Profile'),
             onPressed: () {
               Navigator.push(
