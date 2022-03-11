@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rocket_booker/SpacePort/SpacePorts.dart';
 import 'package:rocket_booker/homepage.dart';
 import 'package:rocket_booker/info_page.dart';
+import 'package:rocket_booker/userbased/LoginPage.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:rocket_booker/reviews/reviews_page.dart';
 import 'package:rocket_booker/services/authentication.dart';
 import 'package:rocket_booker/userbased/LoginPage.dart';
@@ -21,7 +24,8 @@ void main() async {
         '/profile': (context) =>
             ProfilePage(user: Authentication.getCurrentUser()),
         '/FAQ': (context) => InfoPage(),
-        '/Reviews': (context) => ReviewsPage(),
+        '/SpacePorts': ((context) => SpacePorts()),
+        '/SpacePortsDates': ((context) => SpacePorts()),
       },
       home: loginPage()));
 }

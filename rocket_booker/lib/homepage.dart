@@ -55,12 +55,11 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => ReviewsPage()));
             },
           ),
-
           ElevatedButton(
             child: const Text('Book a flight'),
             onPressed: () {
-              Navigator.push(
-              context, MaterialPageRoute(builder: (context) => destinationsPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => destinationsPage()));
             },
           )
         ],
