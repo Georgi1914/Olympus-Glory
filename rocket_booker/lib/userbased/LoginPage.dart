@@ -18,25 +18,26 @@ class _loginPageState extends State<loginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
+  late String _loginMessage = " ";
 
   // FocusNode _focusEmail = FocusNode();
   // FocusNode _focusPassword = FocusNode();
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-    }
-    return firebaseApp;
-  }
+  // Future<FirebaseApp> _initializeFirebase() async {
+  //   FirebaseApp firebaseApp = await Firebase.initializeApp();
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user != null) {
+  //     Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(
+  //         builder: (context) => HomePage(),
+  //       ),
+  //     );
+  //   }
+  //   return firebaseApp;
+  // }
 
   @override
   Widget build(BuildContext context) {
-    _initializeFirebase();
+    // _initializeFirebase();
     return Scaffold(
         appBar: AppBar(
           title: Text("Login Page"),
@@ -65,22 +66,34 @@ class _loginPageState extends State<loginPage> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          User? user =
-                              await Authentication.signInUsingEmailPassword(
-                            email: _emailTextController.text,
-                            password: _passwordTextController.text,
-                            context: context,
-                          );
-                          if (user != null && user.emailVerified) {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      HomePage())
+                        try {
+                          if (_formKey.currentState!.validate()) {
+                            User? user =
+                                await Authentication.signInUsingEmailPassword(
+                              email: _emailTextController.text,
+                              password: _passwordTextController.text,
+                              context: context,
                             );
-                          } else {
-                            print("not verified");
+                            if (user != null && user.emailVerified) {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()));
+                            }
                           }
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'weak-password') {
+                            setState(() {
+                              _loginMessage =
+                                  'The password provided is too weak.';
+                            });
+                          } else if (e.code == 'email-already-in-use') {
+                            setState(() {
+                              _loginMessage =
+                                  'The account already exists for that email.';
+                            });
+                          }
+                        } catch (e) {
+                          print(e);
                         }
                       },
                       child: Text(
@@ -104,7 +117,8 @@ class _loginPageState extends State<loginPage> {
                     ),
                   ),
                 ],
-              )
+              ),
+              Text(_loginMessage),
             ],
           ),
         ));

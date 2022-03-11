@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _focusPassword = FocusNode();
 
   bool _isProcessing = false;
+  late String _registrationMessage = " ";
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +122,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
                                         setState(() {
                                           _isProcessing = false;
+                                          _registrationMessage =
+                                              "Sucessfully registered";
                                         });
+                                      } else {
+                                        _isProcessing = false;
                                       }
                                     },
                                     child: Text(
@@ -131,7 +136,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                               ],
-                            )
+                            ),
+                      Text(_registrationMessage),
                     ],
                   ),
                 )
