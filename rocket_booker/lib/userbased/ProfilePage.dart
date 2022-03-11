@@ -58,12 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ElevatedButton(
                 onPressed: () async {
                   await FirebaseAuth.instance.signOut();
-
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => loginPage(),
-                    ),
-                  );
+                  Navigator.pushNamedAndRemoveUntil(context, "/login", (r) => false);
                 },
                 child: Text('Sign out'))
             // Add widgets for verifying email
