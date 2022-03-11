@@ -3,35 +3,46 @@ import 'package:flutter/material.dart';
 class TemplateCard {
   late String destination;
   late String travelTime;
+  late String imageName;
 
-  TemplateCard({required this.destination, required this.travelTime});
+  TemplateCard({required this.destination, required this.travelTime, required this.imageName});
 
   Card createTemplateCard() {
     return Card(
+      shape: RoundedRectangleBorder(),
       elevation: 5,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.amber,
+      child: InkWell(
+        splashColor: Colors.deepPurple.withAlpha(50),
+        onTap: () {
+          debugPrint('Card tapped.');
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                child: ClipOval(
+                  child: Image.asset('assets/$imageName'),
+                ),
+                //backgroundImage: AssetImage('assets/Moon.jpg'),
+                backgroundColor: Colors.white,
+                radius: 40,
+              ),
+              title: Text(
+                  destination,
+                  style: const TextStyle(
+                    fontSize: 50
+                  )              ),
+              subtitle: Text(
+                  travelTime,
+                  style: const TextStyle(
+                    fontSize: 25,
+                  )
+              ),
             ),
-            title: Text(destination),
-            subtitle: Text('$travelTime'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Choose location',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  )),
-              const SizedBox(width: 8),
-            ],
-          ),
-        ],
+            SizedBox(height: 50,)
+          ],
+        ),
       ),
     );
   }

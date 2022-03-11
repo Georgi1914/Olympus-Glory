@@ -10,9 +10,9 @@ class SpacePorts extends StatefulWidget {
 
 class _SpacePortsState extends State<SpacePorts> {
   List<Card> cardList = [];
-  TemplateCard moscow = TemplateCard(destination: 'Moscow', travelTime: '');
-  TemplateCard tokyo = TemplateCard(destination: 'Tokyo', travelTime: '');
-  TemplateCard plovdiv = TemplateCard(destination: 'Plovdiv', travelTime: '');
+  TemplateCard moscow = TemplateCard(destination: 'Moscow', travelTime: '', imageName: '');
+  TemplateCard tokyo = TemplateCard(destination: 'Tokyo', travelTime: '', imageName: '');
+  TemplateCard plovdiv = TemplateCard(destination: 'Plovdiv', travelTime: '', imageName: '');
 
   @override
   Widget build(BuildContext context) {
