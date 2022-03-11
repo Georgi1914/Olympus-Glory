@@ -38,8 +38,10 @@ class _SpacePortsState extends State<SpacePorts> {
           return ListView.builder(
             itemCount: docs.length,
             itemBuilder: (context, i) {
-              TemplateCard newCard =
-                  TemplateCard(destination: docs[i].id, travelTime: '');
+              TemplateCard newCard = TemplateCard(
+                  destination: docs[i].id,
+                  travelTime: '',
+                  imageName: 'Moon.jpg');
               cardList.add(newCard);
 
               return Column(
