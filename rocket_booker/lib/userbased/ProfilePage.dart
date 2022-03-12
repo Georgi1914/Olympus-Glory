@@ -96,47 +96,5 @@ class _ProfilePageState extends State<ProfilePage> {
         ]),
       ),
     );
-
-    // body: Center(
-    //   child: Column(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Text(
-    //         'NAME: ${_currentUser.displayName}',
-    //         style: Theme.of(context).textTheme.bodyText1,
-    //       ),
-    //       SizedBox(height: 16.0),
-    //       Text(
-    //         'EMAIL: ${_currentUser.email}',
-    //         style: Theme.of(context).textTheme.bodyText1,
-    //       ),
-    //       SizedBox(height: 16.0),
-    //       _currentUser.emailVerified
-    //           ? Text(
-    //               'Email verified',
-    //               style: Theme.of(context)
-    //                   .textTheme
-    //                   .bodyText1!
-    //                   .copyWith(color: Colors.green),
-    //             )
-    //           : Text(
-    //               'Email not verified',
-    //               style: Theme.of(context)
-    //                   .textTheme
-    //                   .bodyText1!
-    //                   .copyWith(color: Colors.red),
-    //             ),
-    //       ElevatedButton(
-    //           onPressed: () async {
-    //             await FirebaseAuth.instance.signOut();
-    //             Navigator.pushNamedAndRemoveUntil(
-    //                 context, "/login", (r) => false);
-    //           },
-    //           child: Text('Sign out'))
-    //       // Add widgets for verifying email
-    //       // and, signing out the user
-    //     ],
-    //   ),
-    // ),
   }
 }
