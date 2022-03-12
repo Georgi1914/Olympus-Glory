@@ -4,11 +4,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rocket_booker/services/authentication.dart';
 
-class confirmationPage extends StatelessWidget{
-   confirmationPage({Key? key}) : super(key: key);
+class confirmationPage extends StatelessWidget {
+  final User user;
+  confirmationPage({required this.user});
 
-late User _currentUser;
+  late User _currentUser = user;
   Widget build(BuildContext context) {
+    final selectedDate =
+        ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Confirmation'),
@@ -16,41 +19,63 @@ late User _currentUser;
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 70.0, horizontal: 30.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Center(
-              child: CircleAvatar(
-                backgroundColor: Colors.grey,
-                radius: 50.0,
-                child: Image(image: AssetImage('assets/avatar.png')),
+            children: [
+              Divider(
+                height: 60,
+                thickness: 3.0,
+                color: Colors.grey[800],
               ),
-            ),
-            Divider(
-              height: 60,
-              thickness: 3.0,
-              color: Colors.grey[800],
-            ),
-            SizedBox(height: 20.0),
-            Text(
-              'NAME',
-              style: TextStyle(
-                color: Colors.grey[900],
-                letterSpacing: 2.0,
-                fontSize: 15.0,
+              SizedBox(height: 20.0),
+              Text(
+                'NAME',
+                style: TextStyle(
+                  color: Colors.grey[900],
+                  letterSpacing: 2.0,
+                  fontSize: 15.0,
+                ),
               ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              "kur",
-              // ${_currentUser.displayName}'
-              style: TextStyle(
-                color: Colors.grey[900],
-                //fontWeight: FontWeight.bold,
-                fontSize: 28.0,
-                letterSpacing: 2.0,
+              SizedBox(height: 10.0),
+              Text(
+                "${_currentUser.displayName}",
+                // ${_currentUser.displayName}'
+                style: TextStyle(
+                  color: Colors.grey[900],
+                  //fontWeight: FontWeight.bold,
+                  fontSize: 28.0,
+                  letterSpacing: 2.0,
+                ),
               ),
-            ),
-            SizedBox(height: 60.0),
-          ],
+              SizedBox(height: 60.0),
+              for (var entries in selectedDate.entries)
+                Column(
+                  children: [
+                    Text(
+                      entries.key,
+                      style: TextStyle(
+                        color: Colors.grey[900],
+                        letterSpacing: 2.0,
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    SizedBox(height: 10.0),
+                    Text(
+                      entries.value,
+                      // ${_currentUser.displayName}'
+                      style: TextStyle(
+                        color: Colors.grey[900],
+                        //fontWeight: FontWeight.bold,
+                        fontSize: 28.0,
+                        letterSpacing: 2.0,
+                      ),
+                    ),
+                    SizedBox(height: 50.0),
+                  ],
+                ),
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("Confirm booking"),
+              ),
+            ],
           ),
         ));
   }

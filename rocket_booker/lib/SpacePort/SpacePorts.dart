@@ -12,7 +12,7 @@ class SpacePorts extends StatefulWidget {
 }
 
 class _SpacePortsState extends State<SpacePorts> {
-  String groupValue = " ";
+  String selectedDate = " ";
   @override
   Widget build(BuildContext context) {
     final destination =
@@ -25,7 +25,14 @@ class _SpacePortsState extends State<SpacePorts> {
       floatingActionButton: FloatingActionButton.extended(
         label: Text("Book your flight"),
         onPressed: () {
-          if (groupValue != " ") {}
+          if (selectedDate != " ") {
+            List<String> parsedDate = selectedDate.split(' ');
+            Navigator.pushNamed(context, '/confirmation', arguments: {
+              'Destination': destination['destination'],
+              'SpacePort': parsedDate[0],
+              'Date': parsedDate[1] + " " + parsedDate[2],
+            });
+          }
         },
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -57,7 +64,6 @@ class _SpacePortsState extends State<SpacePorts> {
                         .snapshots(),
                     builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
-                      print(spacePortSnapshot.data!.docs[index].id);
                       if (snapshot.hasError) {
                         return Text('Something went wrong');
                       }
@@ -75,13 +81,16 @@ class _SpacePortsState extends State<SpacePorts> {
                             return GFRadioListTile(
                               titleText: data['Date'],
                               subTitleText: data['Time'],
-                              value: data['Date'] + data['Time'],
-                              groupValue: groupValue,
+                              value: spacePortSnapshot.data!.docs[index].id +
+                                  " " +
+                                  data['Date'] +
+                                  " " +
+                                  data['Time'],
+                              groupValue: selectedDate,
                               onChanged: (value) {
                                 setState(() {
-                                  groupValue = value;
+                                  selectedDate = value;
                                 });
-                                print(groupValue);
                               },
                             );
                           }).toList(),
