@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rocket_booker/SpacePort/SpacePorts.dart';
-import 'package:rocket_booker/SpacePort/confirmation.dart';
-import 'package:rocket_booker/destinations/destinationsPage.dart';
+import 'package:rocket_booker/booking/SpacePort/SpacePorts.dart';
+import 'package:rocket_booker/booking/SpacePort/SpacePortsDates.dart';
+import 'package:rocket_booker/booking/confirmation.dart';
+import 'package:rocket_booker/booking/destinations/destinationsPage.dart';
 import 'package:rocket_booker/homepage.dart';
+import 'package:rocket_booker/loading.dart';
 import 'package:rocket_booker/info_page.dart';
 import 'package:rocket_booker/userbased/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,7 +24,9 @@ void main() async {
   runApp(MaterialApp(
       initialRoute: '/login',
       routes: {
+
         '/login': (context) => loginPage(),
+        '/loading': (context) => Loading(user: Authentication.getCurrentUser()),
         '/register': (context) => RegisterPage(),
         '/home': (context) => HomePage(user: Authentication.getCurrentUser()),
         '/profile': (context) =>
@@ -31,9 +35,7 @@ void main() async {
         '/SpacePorts': ((context) => SpacePorts()),
         '/reviews': ((context) => ReviewsPage()),
         '/destinations': ((context) => destinationsPage()),
-        '/confirmation': ((context) => confirmationPage(
-              user: Authentication.getCurrentUser(),
-            ))
+        '/confirmation': ((context) => confirmationPage(user: Authentication.getCurrentUser()))
       },
       home: loginPage()));
 }

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:rocket_booker/destinations/TemplateCard.dart';
+import 'package:rocket_booker/booking/destinations/TemplateCard.dart';
 
 class destinationsPage extends StatelessWidget {
   List<Card> destinations = [];

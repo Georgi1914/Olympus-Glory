@@ -121,7 +121,7 @@ class _loginPageState extends State<loginPage> {
                               );
                               if (user != null && user.emailVerified) {
                                 Navigator.pushReplacementNamed(
-                                    context, '/home');
+                                    context, '/loading');
                               }
                             }
                           } on FirebaseAuthException catch (e) {

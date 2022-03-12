@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:rocket_booker/services/authentication.dart';
 import 'package:rocket_booker/userbased/ProfilePage.dart';
 import 'info_page.dart';
 import 'reviews/reviews_page.dart';
-import 'package:rocket_booker/destinations/destinationsPage.dart';
+import 'package:rocket_booker/booking/destinations/destinationsPage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -17,8 +18,51 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  Map data = {};
+  late User _currentUser;
+
+  @override
+  void initState() {
+    _currentUser = widget.user;
+    super.initState();
+  }
+
+  centerpiece(){
+    if(data['bookedFlight'] == true) {
+      return Column(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20))
+            ),
+            child: Text('alo'),
+          )
+        ],
+      );
+    }
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
+      child: const Padding(
+        padding:  EdgeInsets.all(15.0),
+        child:  Text(
+          'Book a flight',
+          style: TextStyle(
+            fontSize: 30,
+          ),
+        ),
+      ),
+      onPressed: () {
+        Navigator.pushNamed(context, '/destinations');
+      },
+    );
+
+  }
+
   @override
   Widget build(BuildContext context) {
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+
     return SafeArea(
       left: false,
       child: Scaffold(
@@ -36,21 +80,23 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
-                        child: const Padding(
-                          padding:  EdgeInsets.all(15.0),
-                          child:  Text(
-                              'Book a flight',
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/destinations');
-                        },
-                      ),
+                      // ElevatedButton(
+                      //   style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
+                      //   child: const Padding(
+                      //     padding:  EdgeInsets.all(15.0),
+                      //     child:  Text(
+                      //         'Book a flight',
+                      //       style: TextStyle(
+                      //         fontSize: 30,
+                      //       ),
+                      //     ),
+                      //   ),
+                      //   onPressed: () {
+                      //     Navigator.pushNamed(context, '/destinations');
+                      //   },
+                      // ),
+
+                      centerpiece(),
                       const SizedBox(height: 10,),
                       ElevatedButton.icon(
                         icon: const Icon(

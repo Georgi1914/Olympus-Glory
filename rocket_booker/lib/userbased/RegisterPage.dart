@@ -6,6 +6,7 @@ import 'package:rocket_booker/services/authentication.dart';
 import 'LoginPage.dart';
 import 'ProfilePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'validation.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -26,6 +27,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool _isProcessing = false;
   late String _registrationMessage = " ";
+
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.deepPurple[800], fontWeight: FontWeight.bold),
                           controller: _emailTextController,
@@ -90,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         TextFormField(
                           style: TextStyle(fontSize: 20, color: Colors.deepPurple[800], fontWeight: FontWeight.bold),
                           controller: _passwordTextController,
@@ -109,9 +112,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             fillColor: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 20.0),
+                        const SizedBox(height: 20.0),
                         _isProcessing
-                            ? CircularProgressIndicator()
+                            ? const CircularProgressIndicator()
                             : Column(
                                 children: [
                                   Padding(
@@ -140,13 +143,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                               setState(() {
                                                 _isProcessing = false;
                                                 _registrationMessage =
-                                                    "Sucessfully registered";
-                                              });
+                                                  "Sucessfully registered";
+                                                users
+                                                  .doc(user!.uid)
+                                                  .set({
+                                                    'bookedFlight' : false
+                                                  });
+                                                Navigator.pushReplacementNamed(context, '/login');
+                                                });
                                             } else {
                                               _isProcessing = false;
                                             }
                                           },
-                                          child: Text(
+                                          child: const Text(
                                             'Start your journey',
                                             style: TextStyle(color: Colors.white, fontSize: 23),
                                           ),
@@ -154,9 +163,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 150.0),
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                  const SizedBox(height: 150.0),
+                                  const Padding(
+                                    padding:  EdgeInsets.fromLTRB(0, 0, 0, 0),
                                     child: Text(
                                       'You already have\n an account?',
                                       textAlign: TextAlign.center,
@@ -177,7 +186,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                     builder: (context) => loginPage()),
                                               );
                                             },
-                                            child: Text(
+                                            child: const Text(
                                                 'Sign In',
                                                 style: TextStyle(color: Colors.white, fontSize: 20),
                                           ),
