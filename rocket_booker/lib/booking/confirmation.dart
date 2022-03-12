@@ -23,16 +23,16 @@ class confirmationPage extends StatelessWidget {
         );
   }
 
-  /*
-  Future<void> uploadFile() async {
-    try {
-      await firebase_storage.FirebaseStorage.instance
-          .ref('uploads/file-to-upload.png')
-          .putFile();
-    } on FirebaseException catch (e) {
-      // e.g, e.code == 'canceled'
-    }
-  }*/
+  // Future<void> uploadFile() async {
+  //   try {
+  //     await firebase_storage.FirebaseStorage.instance
+  //         .ref('uploads/file-to-upload.png')
+  //         .putFile();
+  //   } on FirebaseException catch (e) {
+  //     // e.g, e.code == 'canceled'
+  //   }
+  // }
+
   void setBookedtoTrue() {
     final userUid = _currentUser.uid;
     users.doc(userUid).update({'bookedFlight': true});
