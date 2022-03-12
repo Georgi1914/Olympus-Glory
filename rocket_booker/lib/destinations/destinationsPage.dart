@@ -51,7 +51,7 @@ class destinationsPage extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 26),
+                  padding: const EdgeInsets.fromLTRB(12, 0, 0, 16),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: Colors.deepPurple[600],
