@@ -53,7 +53,6 @@ class _HomePageState extends State<HomePage> {
               //   ],
               // ),
                 Expanded(
-                  flex: 10,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,44 +90,59 @@ class _HomePageState extends State<HomePage> {
                     ],
               ),
                 ),
-              Expanded(
-                //flex:1,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 17),
-                        child: IconButton(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+
+                  SizedBox(
+                    height: 80,
+                    width: 80,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                          child: CircleAvatar(
+                            radius: 32,
+                            backgroundColor: Colors.grey[300],
+                          ),
+                        ),
+                        Positioned(
+                          right: 25,
+                          top: -8,
+                          child: IconButton(
                             onPressed: () {
                               Navigator.pushNamed(context, '/info');
                             },
                             icon: Icon(
                               Icons.info,
-                              color: Colors.blue[600],
-                              size: 62,
+                              color: Colors.deepPurple[800],
+                              size: 64,
                             ),
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/profile');
-                            },
-                            child: const CircleAvatar(
-                              backgroundColor: Colors.blueAccent,
-                              radius: 31,
-                              child: CircleAvatar(
-                                radius: 27,
-                                backgroundImage: AssetImage('assets/blankProfilePicture.png'),
-                              ),
-                            )),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 15, 20),
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/profile');
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.deepPurple.shade800,
+                          radius: 32,
+                          child: CircleAvatar(
+                            radius: 28,
+                            backgroundImage: AssetImage('assets/blankProfilePicture.png'),
+                          ),
+                        )),
+                  ),
+                ],
               ),
             ],
           ),
