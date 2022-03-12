@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,12 +7,23 @@ import 'package:rocket_booker/services/authentication.dart';
 
 class confirmationPage extends StatelessWidget {
   final User user;
+
   confirmationPage({required this.user});
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
 
   late User _currentUser = user;
+
+  void addData(Map data){
+    final userUid = _currentUser.uid;
+    users.doc(userUid).set(data,SetOptions(merge: true),);
+  }
+
   Widget build(BuildContext context) {
     final selectedDate =
-    ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
+    ModalRoute
+        .of(context)!
+        .settings
+        .arguments as Map<dynamic, dynamic>;
     return Scaffold(
         body: Container(
           width: double.infinity,
@@ -89,7 +101,9 @@ class confirmationPage extends StatelessWidget {
                       Row(
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              addData(selectedDate);
+                            },
                             child: Text("Confirm booking"),
                           ),
                           ElevatedButton(
