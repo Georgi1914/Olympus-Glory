@@ -41,6 +41,9 @@ dependencies:
   purchases_flutter: ^3.9.5
   flutter_spinkit: ^5.1.0
   image_picker: ^0.8.4+11
+  firebase_storage: ^10.2.9
+  file_picker: ^4.5.1
+
 
 dev_dependencies:
   flutter_test:
