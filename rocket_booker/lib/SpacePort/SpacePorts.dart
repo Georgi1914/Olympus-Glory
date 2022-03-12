@@ -11,7 +11,7 @@ class SpacePorts extends StatefulWidget {
 }
 
 class _SpacePortsState extends State<SpacePorts> {
-  List<TemplateCard> cardList = [];
+  List<DestinationCard> cardList = [];
   Stream<QuerySnapshot> _SpacePorts = FirebaseFirestore.instance
       .collection('Destinations')
       .doc('Mars')
