@@ -17,6 +17,10 @@ class confirmationPage extends StatelessWidget {
     final userUid = _currentUser.uid;
     users.doc(userUid).set(data,SetOptions(merge: true),);
   }
+  void setBookedtoTrue(){
+    final userUid = _currentUser.uid;
+    users.doc(userUid).update({'bookedFlight' : true});
+  }
 
   Widget build(BuildContext context) {
     final selectedDate =
@@ -114,7 +118,10 @@ class confirmationPage extends StatelessWidget {
                           ),
                           ElevatedButton(
                             onPressed: () {
+
                               addData(selectedDate);
+                              setBookedtoTrue();
+                              Navigator.popAndPushNamed(context, '/loading');
                             },
                             style: ElevatedButton.styleFrom(
                               primary: Colors.deepPurple,
