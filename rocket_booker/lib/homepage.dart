@@ -19,95 +19,85 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment : CrossAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilePage(
-                              user: Authentication.getCurrentUser(),
-                            )),
-                      );
-                    },
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.blueAccent,
-                      radius: 31,
-                      child: CircleAvatar(
-                        radius: 27,
-                        backgroundImage: AssetImage('assets/blankProfilePicture.png'),
-                      ),
-                    )),
-              ),
-            ],
-          ),
-            Expanded(
-              flex: 10,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    child: const Padding(
-                      padding:  EdgeInsets.all(15.0),
-                      child:  Text(
-                          'Book a flight',
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => destinationsPage()));
-                    },
-                  ),
-                  SizedBox(height: 10,),
-                  ElevatedButton(
-                    child: const Text('Reviews'),
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => ReviewsPage()));
-                    },
-                  ),
-                ],
-          ),
-            ),
-          Expanded(
-            flex:1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment : CrossAxisAlignment.end,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 20),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => InfoPage()));
+                  padding: const EdgeInsets.all(10.0),
+                  child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/profile');
                       },
-                      icon: const Icon(
-                        Icons.info,
-                        color: Colors.deepPurple,
-                        size: 40,
-                      ),
-                  ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                        radius: 31,
+                        child: CircleAvatar(
+                          radius: 27,
+                          backgroundImage: AssetImage('assets/blankProfilePicture.png'),
+                        ),
+                      )),
                 ),
               ],
             ),
-          ),
-        ],
+              Expanded(
+                flex: 10,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      child: const Padding(
+                        padding:  EdgeInsets.all(15.0),
+                        child:  Text(
+                            'Book a flight',
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/destinations');
+                      },
+                    ),
+                    SizedBox(height: 10,),
+                    ElevatedButton(
+                      child: const Text('Reviews'),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/reviews');
+                      },
+                    ),
+                  ],
+            ),
+              ),
+            Expanded(
+              flex:1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 20),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/info');
+                        },
+                        icon: const Icon(
+                          Icons.info,
+                          color: Colors.deepPurple,
+                          size: 40,
+                        ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

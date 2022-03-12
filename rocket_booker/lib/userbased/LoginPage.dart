@@ -110,9 +110,7 @@ class _loginPageState extends State<loginPage> {
                                 context: context,
                               );
                               if (user != null && user.emailVerified) {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage(user: Authentication.getCurrentUser(),)));
+                                Navigator.pushReplacementNamed(context , '/home');
                               }
                             }
                           } on FirebaseAuthException catch (e) {
@@ -149,10 +147,7 @@ class _loginPageState extends State<loginPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => RegisterPage()),
-                          );
+                          Navigator.pushNamed(context, '/register');
                         },
                         child: Text(
                           'Register',
