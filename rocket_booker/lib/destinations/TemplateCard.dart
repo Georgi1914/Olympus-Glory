@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class TemplateCard {
+class DestinationCard {
   late String destination;
   late String travelTime;
   late String imageName;
-  TemplateCard(
+  DestinationCard(
       {required this.destination,
       required this.travelTime,
       required this.imageName});
 
-  Card createTemplateCard() {
+  Card createDestinationCard() {
     return Card(
       shape: RoundedRectangleBorder(),
       elevation: 5,

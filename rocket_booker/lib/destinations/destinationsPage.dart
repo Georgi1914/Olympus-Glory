@@ -3,8 +3,8 @@ import 'package:rocket_booker/destinations/TemplateCard.dart';
 
 class destinationsPage extends StatelessWidget {
 
-  TemplateCard mars = TemplateCard(destination: 'Mars', travelTime: '2 months', imageName: 'mars.png');
-  TemplateCard moon = TemplateCard(destination: 'Moon', travelTime: '1 week', imageName: 'Moon.jpg');
+  DestinationCard mars = DestinationCard(destination: 'Mars', travelTime: '2 months', imageName: 'mars.png');
+  DestinationCard moon = DestinationCard(destination: 'Moon', travelTime: '1 week', imageName: 'Moon.jpg');
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,9 @@ class destinationsPage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 20),
-            mars.createTemplateCard(),
+            mars.createDestinationCard(),
             SizedBox(height: 20),
-            moon.createTemplateCard(),
+            moon.createDestinationCard(),
           ],
         ),
       ),
