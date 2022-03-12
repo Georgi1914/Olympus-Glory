@@ -23,45 +23,90 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment : CrossAxisAlignment.end,
+      body: Column(
         children: [
-          
-          ElevatedButton(
-
-            child: const Text('Profile'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ProfilePage(
-                          user: Authentication.getCurrentUser(),
-                        )),
-              );
-            },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment : CrossAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfilePage(
+                              user: Authentication.getCurrentUser(),
+                            )),
+                      );
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: Colors.blueAccent,
+                      radius: 31,
+                      child: CircleAvatar(
+                        radius: 27,
+                        backgroundImage: AssetImage('assets/blankProfilePicture.png'),
+                      ),
+                    )),
+              ),
+            ],
           ),
-          ElevatedButton(
-            child: const Text('Information'),
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => InfoPage()));
-            },
+            Expanded(
+              flex: 10,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    child: const Padding(
+                      padding:  EdgeInsets.all(15.0),
+                      child:  Text(
+                          'Book a flight',
+                        style: TextStyle(
+                          fontSize: 30,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => destinationsPage()));
+                    },
+                  ),
+                  SizedBox(height: 10,),
+                  ElevatedButton(
+                    child: const Text('Reviews'),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => ReviewsPage()));
+                    },
+                  ),
+                ],
           ),
-          ElevatedButton(
-            child: const Text('Reviews'),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ReviewsPage()));
-            },
+            ),
+          Expanded(
+            flex:1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 0, 20),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => InfoPage()));
+                      },
+                      icon: const Icon(
+                        Icons.info,
+                        color: Colors.deepPurple,
+                        size: 40,
+                      ),
+                  ),
+                ),
+              ],
+            ),
           ),
-          ElevatedButton(
-            child: const Text('Book a flight'),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => destinationsPage()));
-            },
-          )
         ],
       ),
     );
