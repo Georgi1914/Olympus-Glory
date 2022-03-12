@@ -4,19 +4,25 @@ class DestinationCard {
   late String destination;
   late String travelTime;
   late String imageName;
+  Function push;
+
   DestinationCard(
       {required this.destination,
       required this.travelTime,
-      required this.imageName});
+      required this.imageName,
+      required this.push});
 
   Card createDestinationCard() {
     return Card(
-      shape: RoundedRectangleBorder(),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
       elevation: 5,
       child: InkWell(
         splashColor: Colors.deepPurple.withAlpha(50),
-        onTap: () {
-          debugPrint('Card tapped.');
+        onTap: (){
+          print("Card pressed");
+          push();
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -36,7 +42,7 @@ class DestinationCard {
                     fontSize: 25,
                   )),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             )
           ],

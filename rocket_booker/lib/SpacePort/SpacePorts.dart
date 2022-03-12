@@ -11,6 +11,8 @@ class SpacePorts extends StatefulWidget {
 }
 
 class _SpacePortsState extends State<SpacePorts> {
+
+
   List<DestinationCard> cardList = [];
   Stream<QuerySnapshot> _SpacePorts = FirebaseFirestore.instance
       .collection('Destinations')
@@ -22,6 +24,11 @@ class _SpacePortsState extends State<SpacePorts> {
 
   @override
   Widget build(BuildContext context) {
+
+    final data = ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
+
+    print(data['destination']);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("SpacePorts"),
