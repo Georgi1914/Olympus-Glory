@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rocket_booker/services/authentication.dart';
 
 class ProfilePage extends StatefulWidget {
   final User user;
@@ -93,6 +94,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   fontSize: 18.0,
                   letterSpacing: 1.0,
                 ),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  Authentication.signOut();
+                  Navigator.popAndPushNamed(context, '/login');
+                },
+                child: Text("Sign out"),
               ),
             ],
           ),
