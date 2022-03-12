@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rocket_booker/SpacePort/SpacePorts.dart';
 import 'package:rocket_booker/SpacePort/SpacePortsDates.dart';
+import 'package:rocket_booker/SpacePort/confirmation.dart';
 import 'package:rocket_booker/destinations/destinationsPage.dart';
 import 'package:rocket_booker/homepage.dart';
 import 'package:rocket_booker/info_page.dart';
@@ -20,7 +21,7 @@ void main() async {
   // );
   FirebaseApp defaultApp = await Firebase.initializeApp();
   runApp(MaterialApp(
-      initialRoute: '/login',
+      initialRoute: '/confirmation',
       routes: {
         '/login': (context) => loginPage(),
         '/register': (context) => RegisterPage(),
@@ -31,6 +32,7 @@ void main() async {
         '/SpacePorts': ((context) => SpacePorts()),
         '/reviews': ((context) => ReviewsPage()),
         '/destinations': ((context) => destinationsPage()),
+        '/confirmation': ((context) => confirmationPage())
       },
       home: loginPage()));
 }
