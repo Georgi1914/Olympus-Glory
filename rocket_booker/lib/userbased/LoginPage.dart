@@ -39,6 +39,7 @@ class _loginPageState extends State<loginPage> {
   Widget build(BuildContext context) {
     // _initializeFirebase();
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
@@ -54,7 +55,7 @@ class _loginPageState extends State<loginPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: TextFormField(
-                    textAlign: TextAlign.center,
+                    //textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20, color: Colors.deepPurple[800], fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -76,7 +77,7 @@ class _loginPageState extends State<loginPage> {
                   padding: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                   child: TextFormField(
                     style: TextStyle(fontSize: 20, color: Colors.deepPurple[800], fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
+                    //textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -98,6 +99,7 @@ class _loginPageState extends State<loginPage> {
                   child: Expanded(
                     child: SizedBox(
                       width: 230,
+                      height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
                         onPressed: () async {
@@ -110,9 +112,7 @@ class _loginPageState extends State<loginPage> {
                                 context: context,
                               );
                               if (user != null && user.emailVerified) {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage(user: Authentication.getCurrentUser(),)));
+                                Navigator.pushReplacementNamed(context , '/home');
                               }
                             }
                           } on FirebaseAuthException catch (e) {
@@ -135,7 +135,7 @@ class _loginPageState extends State<loginPage> {
 
                         child: Text(
                           'Sign In',
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          style: TextStyle(color: Colors.white, fontSize: 23),
                         ),
                       ),
                     ),
@@ -146,23 +146,26 @@ class _loginPageState extends State<loginPage> {
                   child: Expanded(
                     child: SizedBox(
                       width: 230,
+                      height: 50,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => RegisterPage()),
-                          );
+                          Navigator.pushNamed(context, '/register');
                         },
                         child: Text(
                           'Register',
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          style: TextStyle(color: Colors.white, fontSize: 23),
                         ),
                       ),
                     ),
                   ),
                 ),
-                Text(_loginMessage),
+                Text(
+                    _loginMessage,
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.white,
+                    ),),
               ],
             ),
           ),
