@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:rocket_booker/userbased/LoginPage.dart';
 
 class Authentication {
   static Future<dynamic> registerUsingEmailPassword({
@@ -40,10 +41,14 @@ class Authentication {
     return user;
   }
 
-  static User getCurrentUser()  {
+  static User getCurrentUser() {
     FirebaseAuth auth = FirebaseAuth.instance;
     User user;
     user = auth.currentUser as User;
     return user;
+  }
+
+  static Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 }
