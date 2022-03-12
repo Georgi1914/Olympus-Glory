@@ -35,15 +35,44 @@ class destinationsPage extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(),
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: 20),
-            mars.createDestinationCard(),
-            SizedBox(height: 20),
-            moon.createDestinationCard(),
-          ],
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/Space.jpg"),
+                fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              mars.createDestinationCard(),
+              SizedBox(height: 20),
+              moon.createDestinationCard(),
+              Spacer(),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 26),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.deepPurple[600],
+                        side: BorderSide(width: 3, color: Colors.deepPurple),
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(18)
+                    ),
+                    child: const Icon(
+                      Icons.arrow_back_rounded,
+                      size: 30,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
