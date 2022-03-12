@@ -5,14 +5,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rocket_booker/services/authentication.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
 class confirmationPage extends StatelessWidget {
   final User user;
 
   confirmationPage({required this.user});
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
-
+  FirebaseStorage storage = FirebaseStorage.instance;
   late User _currentUser = user;
 
   void addData(Map data) {
@@ -23,20 +25,18 @@ class confirmationPage extends StatelessWidget {
         );
   }
 
-  // Future<void> uploadFile() async {
-  //   try {
-  //     await firebase_storage.FirebaseStorage.instance
-  //         .ref('uploads/file-to-upload.png')
-  //         .putFile();
-  //   } on FirebaseException catch (e) {
-  //     // e.g, e.code == 'canceled'
-  //   }
-  // }
-
   void setBookedtoTrue() {
     final userUid = _currentUser.uid;
     users.doc(userUid).update({'bookedFlight': true});
   }
+
+  Future<void> _uploadFile(File file, String filename) async {
+    Reference fileRef;
+    fileRef = FirebaseStorage.instance.ref().child(filename);
+    final UploadTask uploadTask = fileRef.putFile(file);
+  }
+
+  bool attachedFile = false;
 
   Widget build(BuildContext context) {
     final selectedDate =
@@ -117,59 +117,44 @@ class confirmationPage extends StatelessWidget {
                     ),
                   Column(
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: () async {
-                          final result = await FilePicker.platform.pickFiles();
+                      Visibility(
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            FilePickerResult file = await FilePicker.platform
+                                    .pickFiles(
+                                        type: FileType.custom,
+                                        allowedExtensions: ['pdf'])
+                                as FilePickerResult;
+                            if (file != null) {
+                              _uploadFile(File(file.files[0].path as String),
+                                  file.files[0].name);
 
-                          if (result != null) {
-                            // uploadFile(result.files[0]);
-                          }
-                        },
-                        icon: Icon(
-                          Icons.attachment,
-                          color: Colors.white,
-                          size: 24.0,
+                              attachedFile = true;
+                            }
+                          },
+                          icon: Icon(
+                            Icons.attachment,
+                            color: Colors.white,
+                            size: 24.0,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple,
+                          ),
+                          label: Text("Attach file"),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.deepPurple,
-                        ),
-                        label: Text("Attach file"),
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          addData(selectedDate);
+                          if (attachedFile) {
+                            addData(selectedDate);
+                            setBookedtoTrue();
+                            Navigator.popAndPushNamed(context, '/loading');
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.deepPurple,
                         ),
                         child: Text("Confirm booking"),
-                      ),
-                      Column(
-                        children: [
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.attachment,
-                              color: Colors.white,
-                              size: 24.0,
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.deepPurple,
-                            ),
-                            label: Text("Attach file"),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              addData(selectedDate);
-                              setBookedtoTrue();
-                              Navigator.popAndPushNamed(context, '/loading');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.deepPurple,
-                            ),
-                            child: Text("Confirm booking"),
-                          ),
-                        ],
                       ),
                     ],
                   ),
