@@ -17,7 +17,7 @@ void main() async {
   // );
   FirebaseApp defaultApp = await Firebase.initializeApp();
   runApp(MaterialApp(
-      initialRoute: '/login',
+      initialRoute: '/loginPage',
       routes: {
         '/login': (context) => loginPage(),
         '/home': (context) => HomePage(user: Authentication.getCurrentUser()),
