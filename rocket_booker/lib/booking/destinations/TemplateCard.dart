@@ -16,8 +16,14 @@ class DestinationCard {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
+        side: BorderSide(
+            width: 4,
+            color: Colors.deepPurple,
+        ),
       ),
-      elevation: 5,
+      color: Colors.white70,
+      elevation: 13,
+      shadowColor: Colors.blue,
       child: InkWell(
         splashColor: Colors.deepPurple.withAlpha(50),
         onTap: (){

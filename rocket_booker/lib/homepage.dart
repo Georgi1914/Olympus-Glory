@@ -119,36 +119,25 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-
-                  SizedBox(
-                    height: 80,
-                    width: 80,
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                          child: CircleAvatar(
-                            radius: 32,
-                            backgroundColor: Colors.grey[300],
-                          ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 26),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.deepPurple[600],
+                            side: BorderSide(width: 3, color: Colors.white),
+                            shape: const CircleBorder(),
+                            padding: const EdgeInsets.all(18)
                         ),
-                        Positioned(
-                          right: 25,
-                          top: -8,
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/info');
-                            },
-                            icon: Icon(
-                              Icons.info,
-                              color: Colors.deepPurple[800],
-                              size: 64,
-                            ),
-                          ),
+                        child: const Text(
+                          'i',
+                          style: TextStyle(fontSize: 30, fontFamily: 'Courier', fontWeight: FontWeight.bold ),
                         ),
-                      ],
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/info');
+                        },
+                      ),
                     ),
                   ),
                   const Spacer(),
