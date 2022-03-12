@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rocket_booker/SpacePort/SpacePorts.dart';
+import 'package:rocket_booker/SpacePort/SpacePortsDates.dart';
 import 'package:rocket_booker/homepage.dart';
 import 'package:rocket_booker/info_page.dart';
 import 'package:rocket_booker/userbased/LoginPage.dart';
@@ -17,7 +18,7 @@ void main() async {
   // );
   FirebaseApp defaultApp = await Firebase.initializeApp();
   runApp(MaterialApp(
-      initialRoute: '/loginPage',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => loginPage(),
         '/home': (context) => HomePage(user: Authentication.getCurrentUser()),
@@ -25,7 +26,6 @@ void main() async {
             ProfilePage(user: Authentication.getCurrentUser()),
         '/FAQ': (context) => InfoPage(),
         '/SpacePorts': ((context) => SpacePorts()),
-        '/SpacePortsDates': ((context) => SpacePorts()),
       },
       home: loginPage()));
 }
