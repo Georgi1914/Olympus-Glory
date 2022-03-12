@@ -20,83 +20,118 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      left: false,
       child: Scaffold(
-        body: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment : CrossAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/profile');
-                      },
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.blueAccent,
-                        radius: 31,
-                        child: CircleAvatar(
-                          radius: 27,
-                          backgroundImage: AssetImage('assets/blankProfilePicture.png'),
-                        ),
-                      )),
-                ),
-              ],
-            ),
-              Expanded(
-                flex: 10,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: const Padding(
-                        padding:  EdgeInsets.all(15.0),
-                        child:  Text(
-                            'Book a flight',
-                          style: TextStyle(
-                            fontSize: 30,
+        body: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/Space.jpg"),
+                fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   crossAxisAlignment: CrossAxisAlignment.end,
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.all(10.0),
+              //       child: GestureDetector(
+              //           onTap: () {
+              //             Navigator.pushNamed(context, '/profile');
+              //           },
+              //           child: const CircleAvatar(
+              //             backgroundColor: Colors.blueAccent,
+              //             radius: 31,
+              //             child: CircleAvatar(
+              //               radius: 27,
+              //               backgroundImage: AssetImage('assets/blankProfilePicture.png'),
+              //             ),
+              //           )),
+              //     ),
+              //   ],
+              // ),
+                Expanded(
+                  flex: 10,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
+                        child: const Padding(
+                          padding:  EdgeInsets.all(15.0),
+                          child:  Text(
+                              'Book a flight',
+                            style: TextStyle(
+                              fontSize: 30,
+                            ),
                           ),
                         ),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/destinations');
-                      },
-                    ),
-                    SizedBox(height: 10,),
-                    ElevatedButton(
-                      child: const Text('Reviews'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/reviews');
-                      },
-                    ),
-                  ],
-            ),
-              ),
-            Expanded(
-              flex:1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(5, 0, 0, 20),
-                    child: IconButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/info');
+                          Navigator.pushNamed(context, '/destinations');
                         },
+                      ),
+                      const SizedBox(height: 10,),
+                      ElevatedButton.icon(
                         icon: const Icon(
-                          Icons.info,
-                          color: Colors.deepPurple,
-                          size: 40,
+                          Icons.reviews_outlined,
+                          color: Colors.white,
+                          size: 28.0,
                         ),
-                    ),
-                  ),
-                ],
+                        style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
+                        label: const Text(
+                          'Reviews',
+                          style: TextStyle(fontSize: 20)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/reviews');
+                        },
+                      ),
+                    ],
               ),
-            ),
-          ],
+                ),
+              Expanded(
+                //flex:1,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 17),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/info');
+                            },
+                            icon: Icon(
+                              Icons.info,
+                              color: Colors.blue[600],
+                              size: 62,
+                            ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                        child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/profile');
+                            },
+                            child: const CircleAvatar(
+                              backgroundColor: Colors.blueAccent,
+                              radius: 31,
+                              child: CircleAvatar(
+                                radius: 27,
+                                backgroundImage: AssetImage('assets/blankProfilePicture.png'),
+                              ),
+                            )),
+                      ),
+                    ],
+                  ),
+              ),
+            ],
+          ),
         ),
       ),
     );

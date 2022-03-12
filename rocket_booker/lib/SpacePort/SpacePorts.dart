@@ -12,22 +12,20 @@ class SpacePorts extends StatefulWidget {
 
 class _SpacePortsState extends State<SpacePorts> {
 
-
   List<DestinationCard> cardList = [];
+
   Stream<QuerySnapshot> _SpacePorts = FirebaseFirestore.instance
       .collection('Destinations')
-      .doc('Mars')
+      .doc('Moon')
       .collection('SpacePort')
-      .doc('Moscow')
-      .collection('Flights')
       .snapshots();
 
   @override
   Widget build(BuildContext context) {
 
-    final data = ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
+    final destination = ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
 
-    print(data['destination']);
+    print(destination['destination']);
 
     return Scaffold(
       appBar: AppBar(
@@ -38,64 +36,56 @@ class _SpacePortsState extends State<SpacePorts> {
           StreamBuilder<QuerySnapshot>(
               stream: _SpacePorts,
               builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
+                  AsyncSnapshot<QuerySnapshot> spacePortSnapshot) {
+                if (spacePortSnapshot.hasError) {
                   return Text('Something went wrong');
                 }
 
-                if (snapshot.connectionState == ConnectionState.waiting) {
+                if (spacePortSnapshot.connectionState ==
+                    ConnectionState.waiting) {
                   return Text("Loading");
                 }
-                return ListView(
-                  children:
-                      snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    return GFAccordion(
-                      title: document.reference.parent.parent?.id,
-                      contentChild: Row(children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(data['Date']),
-                        ),
-                      ]),
-                    );
-                  }).toList(),
-                );
-                // return ListView.builder(
-                //     itemCount: snapshot.data?.docs.length,
-                //     itemBuilder: (context, index) {
-                //       // DocumentSnapshot flights = snapshot.data!.docs[index];
-                //       return GFAccordion(
-                //         title: snapshot.,
-                //         contentChild: Row(children: [
-                //           TextButton(
-                //             onPressed: () {},
-                //             child: Text('kur'),
-                //           ),
-                //         ]),
-                //       );
-                //     });
-              }
 
-              // final docs = snapshot.data!.docs;
-              // Map<String, dynamic> data = docs.d()! as Map<String, dynamic>;
+                return ListView.builder(
+                    itemCount: spacePortSnapshot.data?.docs.length,
+                    itemBuilder: (context, index) {
+                      return StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('Destinations')
+                            .doc('Moon')
+                            .collection('SpacePort')
+                            .doc(spacePortSnapshot.data!.docs[index].id)
+                            .collection('Flights')
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          print(spacePortSnapshot.data!.docs[index].id);
+                          if (snapshot.hasError) {
+                            return Text('Something went wrong');
+                          }
 
-              // return ListView.builder(
-              //   itemCount: docs.length,
-              //   itemBuilder: (context, i) {
-              //     return Column(
-              //       children: [
-              //         GFAccordion(
-              //           title: docs[i].id,
-              //           content: docs[i].,
-              //         )
-              //       ],
-              //     );
-              //   },
-              // );
-
-              ),
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Text("Loading");
+                          }
+                          return GFAccordion(
+                            title: spacePortSnapshot.data!.docs[index].id,
+                            contentChild: Column(
+                              children: snapshot.data!.docs
+                                  .map((DocumentSnapshot document) {
+                                Map<String, dynamic> data =
+                                    document.data()! as Map<String, dynamic>;
+                                return TextButton(
+                                  child: Text(data['Date']),
+                                  onPressed: () {},
+                                );
+                              }).toList(),
+                            ),
+                          );
+                        },
+                      );
+                    });
+              }),
     );
   }
 }
