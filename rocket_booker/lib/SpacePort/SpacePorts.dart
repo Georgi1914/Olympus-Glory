@@ -11,21 +11,10 @@ class SpacePorts extends StatefulWidget {
 }
 
 class _SpacePortsState extends State<SpacePorts> {
-
-  List<DestinationCard> cardList = [];
-
-  Stream<QuerySnapshot> _SpacePorts = FirebaseFirestore.instance
-      .collection('Destinations')
-      .doc('Moon')
-      .collection('SpacePort')
-      .snapshots();
-
   @override
   Widget build(BuildContext context) {
-
-    final destination = ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
-
-    print(destination['destination']);
+    final destination =
+        ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +23,11 @@ class _SpacePortsState extends State<SpacePorts> {
       body:
           //
           StreamBuilder<QuerySnapshot>(
-              stream: _SpacePorts,
+              stream: FirebaseFirestore.instance
+                  .collection('Destinations')
+                  .doc(destination['destination'])
+                  .collection('SpacePort')
+                  .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> spacePortSnapshot) {
                 if (spacePortSnapshot.hasError) {
@@ -52,7 +45,7 @@ class _SpacePortsState extends State<SpacePorts> {
                       return StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection('Destinations')
-                            .doc('Moon')
+                            .doc(destination['destination'])
                             .collection('SpacePort')
                             .doc(spacePortSnapshot.data!.docs[index].id)
                             .collection('Flights')
