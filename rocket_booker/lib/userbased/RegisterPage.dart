@@ -158,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Padding(
                                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                     child: Text(
-                                      'Or if you already have\n an account',
+                                      'You already have\n an account?',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)
                                     ),
