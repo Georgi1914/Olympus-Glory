@@ -22,6 +22,7 @@ class confirmationPage extends StatelessWidget {
           SetOptions(merge: true),
         );
   }
+
   /*
   Future<void> uploadFile() async {
     try {
@@ -32,6 +33,10 @@ class confirmationPage extends StatelessWidget {
       // e.g, e.code == 'canceled'
     }
   }*/
+  void setBookedtoTrue() {
+    final userUid = _currentUser.uid;
+    users.doc(userUid).update({'bookedFlight': true});
+  }
 
   Widget build(BuildContext context) {
     final selectedDate =
@@ -138,6 +143,33 @@ class confirmationPage extends StatelessWidget {
                           primary: Colors.deepPurple,
                         ),
                         child: Text("Confirm booking"),
+                      ),
+                      Column(
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.attachment,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.deepPurple,
+                            ),
+                            label: Text("Attach file"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              addData(selectedDate);
+                              setBookedtoTrue();
+                              Navigator.popAndPushNamed(context, '/loading');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.deepPurple,
+                            ),
+                            child: Text("Confirm booking"),
+                          ),
+                        ],
                       ),
                     ],
                   ),
