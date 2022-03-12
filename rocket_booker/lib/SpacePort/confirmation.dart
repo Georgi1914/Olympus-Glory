@@ -34,7 +34,7 @@ class confirmationPage extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(30, 110, 30, 100),
+                padding: const EdgeInsets.fromLTRB(30, 110, 30, 0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white70,
@@ -98,17 +98,28 @@ class confirmationPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                      Row(
+                      Column(
                         children: [
+                          ElevatedButton.icon(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.attachment,
+                              color: Colors.white,
+                              size: 24.0,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.deepPurple,
+                            ),
+                            label: Text("Attach file"),
+                          ),
                           ElevatedButton(
                             onPressed: () {
                               addData(selectedDate);
                             },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.deepPurple,
+                            ),
                             child: Text("Confirm booking"),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Text("Dashko"),
                           ),
                         ],
                       ),
@@ -116,10 +127,11 @@ class confirmationPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Spacer(),
               Align(
                 alignment: Alignment.bottomLeft,
                 child:Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 0, 5),
+                  padding: const EdgeInsets.fromLTRB(15, 0, 0, 15),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         primary: Colors.deepPurple[600],
