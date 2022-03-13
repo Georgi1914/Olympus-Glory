@@ -33,57 +33,53 @@ class _HomePageState extends State<HomePage> {
 
   centerpiece(){
     if(data['bookedFlight'] == true) {
-      return Column(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20))
-            ),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-                side: const BorderSide(
-                width: 4,
-                color: Colors.deepPurple,
-                ),
-              ),
-              color: Colors.white70,
-              elevation: 13,
-              shadowColor: Colors.blue,
-              child:Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Destination: ${data['destination']}',
-                      style: const TextStyle(
-                        fontSize: 25,
-                      ),
-                    ),
-                    Text(
-                      'Spaceport: ${data['spacePort']}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                      ),
-                    ),
-                    Text(
-                      'Date: ${DateFormat('dd-MM-yyyy').format(date)}',
-                      style: const TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                    Text(
-                      'Time of departure: ${DateFormat.Hm().format(date)}',
-                      style: const TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+      return Container(
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20))
+        ),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: const BorderSide(
+            width: 4,
+            color: Colors.deepPurple,
             ),
           ),
-        ],
+          color: Colors.white70,
+          elevation: 13,
+          shadowColor: Colors.blue,
+          child:Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Text(
+                  'Destination: ${data['destination']}',
+                  style: const TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+                Text(
+                  'Spaceport: ${data['spacePort']}',
+                  style: const TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  'Date: ${DateFormat('dd-MM-yyyy').format(date)}',
+                  style: const TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  'Time of departure: ${DateFormat.Hm().format(date)}',
+                  style: const TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     }
     return ElevatedButton(
@@ -107,10 +103,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
-    date = data.isNotEmpty ? DateTime.now() : DateTime.parse(data['date']);
-    /*final DateTime now = DateTime.now();
-  final DateFormat formatter = DateFormat('yyyy-MM-dd');
-  final String formatted = formatter.format(now);*/
+    date = DateTime.parse(data['date']);
 
     return SafeArea(
       left: false,
@@ -129,22 +122,6 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // ElevatedButton(
-                      //   style: ElevatedButton.styleFrom(primary: Colors.deepPurple[800]),
-                      //   child: const Padding(
-                      //     padding:  EdgeInsets.all(15.0),
-                      //     child:  Text(
-                      //         'Book a flight',
-                      //       style: TextStyle(
-                      //         fontSize: 30,
-                      //       ),
-                      //     ),
-                      //   ),
-                      //   onPressed: () {
-                      //     Navigator.pushNamed(context, '/destinations');
-                      //   },
-                      // ),
-
                       centerpiece(),
                       const SizedBox(height: 10,),
                       ElevatedButton.icon(
