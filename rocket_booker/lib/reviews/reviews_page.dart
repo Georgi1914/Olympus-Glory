@@ -30,7 +30,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 ),
                 titleText: 'Josh Usher',
                 subTitleText: 'Just got back from the Moon. It was amazing!',
-                color: Colors.deepPurple[800],
+                color: Colors.white.withAlpha(200),
                 icon: Icon(Icons.favorite),
               ),
               GFListTile(
@@ -42,6 +42,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 //     'Although my flight was about 2 years ago, I think about it regularly. How could you forget such unbelievable experience?',
                 subTitleText:
                     'Even tho due to technical and other issues my flight\'s duration was shortened, I still very much liked it - especially the part of looking through the window and seeing the Earth in it\s full beauty!',
+                color: Colors.white.withAlpha(200),
                 icon: Icon(Icons.favorite),
               ),
               GFListTile(
@@ -52,6 +53,7 @@ class _ReviewsPageState extends State<ReviewsPage> {
                 subTitleText:
                     'Although my flight was about 2 years ago, I think about it regularly. How could you forget such unbelievable experience?',
                 //     'Even tho due to technical and other issues my flight\'s duration was shortened, I still very much liked it - especially the part of looking through the window and seeing the Earth in it\s full beauty!',
+                color: Colors.white.withAlpha(200),
                 icon: Icon(Icons.favorite),
               ),
               Spacer(),
