@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
-    date = DateTime.parse(data['date']);
+    date = data.isNotEmpty ? DateTime.now() : DateTime.parse(data['date']);
 
     return SafeArea(
       left: false,

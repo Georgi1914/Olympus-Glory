@@ -35,7 +35,17 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text('Your Profile'),
         centerTitle: true,
       ),
-      body: Padding(
+      body: Container(
+          decoration: BoxDecoration(
+          color: Colors.white70,
+          border: Border.all(color: Colors.black, width: 3),
+          image: const DecorationImage(
+            image: AssetImage("assets/Space.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+      child: SafeArea(
+        child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 70.0, horizontal: 30.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ProfileImage(),
@@ -45,22 +55,43 @@ class _ProfilePageState extends State<ProfilePage> {
             color: Colors.grey[600],
           ),
           SizedBox(height: 60.0),
-          Row(
-            children: [
-              Icon(Icons.account_box_sharp),
-              SizedBox(width: 10.0),
-              Text(
-                '${_currentUser.displayName}',
-                style: TextStyle(
-                  color: Colors.grey[900],
-                  fontSize: 22.0,
-                  letterSpacing: 1.0,
-                ),
+
+          Container(
+            decoration: ShapeDecoration(
+              color: Colors.white.withAlpha(2500),
+              shape: RoundedRectangleBorder (
+                borderRadius: BorderRadius.circular(32.0),
+              )
+            ),
+            child: Padding(
+              padding:  EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  Icon(Icons.account_box_sharp),
+                  SizedBox(width: 10.0),
+                  Text(
+                    '${_currentUser.displayName}',
+                    style: TextStyle(
+                      color: Colors.grey[900],
+                      fontSize: 22.0,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
           SizedBox(height: 30.0),
-          Row(
+          Container(
+          decoration: ShapeDecoration(
+    color: Colors.white.withAlpha(2500),
+    shape: RoundedRectangleBorder (
+    borderRadius: BorderRadius.circular(32.0),
+    )
+    ),
+    child: Padding(
+    padding:  EdgeInsets.all(15.0),
+    child:Row(
             children: [
               Icon(Icons.mail_sharp),
               SizedBox(width: 10.0),
@@ -74,12 +105,24 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
+          ),
+          ),
+
           SizedBox(height: 30.0),
-          Row(
+    Container(
+    decoration: ShapeDecoration(
+    color: Colors.white.withAlpha(2500),
+    shape: RoundedRectangleBorder (
+    borderRadius: BorderRadius.circular(32.0),
+    )
+    ),
+    child: Padding(
+    padding:  EdgeInsets.all(15.0),
+    child:Row(
             children: [
               Icon(
                 Icons.verified,
-                color: Colors.green,
+                color: Colors.greenAccent,
               ),
               SizedBox(width: 10.0),
               Text(
@@ -92,6 +135,9 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ],
           ),
+    ),
+    ),
+
           SizedBox(height: 30.0),
           SizedBox(
             child: Padding(
@@ -113,6 +159,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ]),
       ),
+    ),
+    )
     );
   }
 
