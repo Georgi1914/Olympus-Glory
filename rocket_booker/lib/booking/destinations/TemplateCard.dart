@@ -16,7 +16,7 @@ class DestinationCard {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
-        side: BorderSide(
+        side: const BorderSide(
             width: 4,
             color: Colors.deepPurple,
         ),

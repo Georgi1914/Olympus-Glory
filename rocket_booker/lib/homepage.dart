@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rocket_booker/services/authentication.dart';
 import 'package:rocket_booker/userbased/ProfilePage.dart';
 import 'info_page.dart';
@@ -11,7 +12,7 @@ import 'package:rocket_booker/booking/destinations/destinationsPage.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
-  const HomePage({required this.user});
+  HomePage({required this.user});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -21,6 +22,8 @@ class _HomePageState extends State<HomePage> {
 
   Map data = {};
   late User _currentUser;
+  late DateTime date;
+
 
   @override
   void initState() {
@@ -36,8 +39,50 @@ class _HomePageState extends State<HomePage> {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20))
             ),
-            child: Text('alo'),
-          )
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+                side: const BorderSide(
+                width: 4,
+                color: Colors.deepPurple,
+                ),
+              ),
+              color: Colors.white70,
+              elevation: 13,
+              shadowColor: Colors.blue,
+              child:Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Destination: ${data['destination']}',
+                      style: const TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                    Text(
+                      'Spaceport: ${data['spacePort']}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    Text(
+                      'Date: ${DateFormat('dd-MM-yyyy').format(date)}',
+                      style: const TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      'Time of departure: ${DateFormat.Hm().format(date)}',
+                      style: const TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       );
     }
@@ -62,6 +107,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
+    date = data.isNotEmpty ? DateTime.now() : DateTime.parse(data['date']);
+    /*final DateTime now = DateTime.now();
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+  final String formatted = formatter.format(now);*/
 
     return SafeArea(
       left: false,

@@ -26,7 +26,7 @@ class _loginPageState extends State<loginPage> {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushReplacementNamed('/loading');
     }
     return firebaseApp;
   }
