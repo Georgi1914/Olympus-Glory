@@ -1,4 +1,3 @@
-// import 'dart:html';
 import 'dart:core';
 import 'dart:io';
 
@@ -45,26 +44,22 @@ class _ProfilePageState extends State<ProfilePage> {
             thickness: 2.0,
             color: Colors.grey[600],
           ),
-          SizedBox(height: 20.0),
-          Text(
-            'NAME',
-            style: TextStyle(
-              color: Colors.grey[900],
-              letterSpacing: 2.0,
-              fontSize: 15.0,
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            '${_currentUser.displayName}',
-            style: TextStyle(
-              color: Colors.grey[900],
-              //fontWeight: FontWeight.bold,
-              fontSize: 28.0,
-              letterSpacing: 2.0,
-            ),
-          ),
           SizedBox(height: 60.0),
+          Row(
+            children: [
+              Icon(Icons.account_box_sharp),
+              SizedBox(width: 10.0),
+              Text(
+                '${_currentUser.displayName}',
+                style: TextStyle(
+                  color: Colors.grey[900],
+                  fontSize: 22.0,
+                  letterSpacing: 1.0,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 30.0),
           Row(
             children: [
               Icon(Icons.mail_sharp),
@@ -73,7 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 '${_currentUser.email}',
                 style: TextStyle(
                   color: Colors.grey[900],
-                  fontSize: 18.0,
+                  fontSize: 22.0,
                   letterSpacing: 1.0,
                 ),
               ),
@@ -91,31 +86,35 @@ class _ProfilePageState extends State<ProfilePage> {
                 'Your email is verified',
                 style: TextStyle(
                   color: Colors.grey[900],
-                  fontSize: 18.0,
+                  fontSize: 22.0,
                   letterSpacing: 1.0,
                 ),
               ),
-              ElevatedButton(
+            ],
+          ),
+          SizedBox(height: 30.0),
+          SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+              child: ElevatedButton(
                 onPressed: () async {
                   Authentication.signOut();
                   Navigator.popAndPushNamed(context, '/login');
                 },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(90.0, 20.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
                 child: Text("Sign out"),
               ),
-            ],
+            ),
           ),
         ]),
       ),
     );
   }
-
-  // void takePhoto(ImageSource source) async {
-  //   final pickedFile = await picker.pickImage(source: source);
-  //
-  //   setState(() {
-  //     imageFile = pickedFile as PickedFile;
-  //   });
-  // }
 
   Widget ProfileImage() {
     if (this.image == null) {
@@ -126,23 +125,18 @@ class _ProfilePageState extends State<ProfilePage> {
               radius: 60.0,
               backgroundColor: Colors.grey,
               backgroundImage: AssetImage('assets/avatar.png'),
-              //FileImage(image as File),
             ),
             Positioned(
               bottom: 10.0,
               right: 10.0,
               child: InkWell(
                 onTap: () {
-                  // showModalBottomSheet(
-                  //   context: context,
-                  //   builder: ((builder) => showImageSource(context)),
-                  // );
                   showImageSource(context);
                 },
                 child: Icon(
                   Icons.camera_alt,
                   size: 25.0,
-                  color: Colors.amber,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -157,23 +151,18 @@ class _ProfilePageState extends State<ProfilePage> {
               radius: 60.0,
               backgroundColor: Colors.grey,
               backgroundImage: FileImage(image as File),
-              //FileImage(image as File),
             ),
             Positioned(
               bottom: 10.0,
               right: 10.0,
               child: InkWell(
                 onTap: () {
-                  // showModalBottomSheet(
-                  //   context: context,
-                  //   builder: ((builder) => showImageSource(context)),
-                  // );
                   showImageSource(context);
                 },
                 child: Icon(
                   Icons.camera_alt,
                   size: 25.0,
-                  color: Colors.amber,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -204,57 +193,12 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  // Widget bottomSheet() {
-  //   return Container(
-  //     height: 100.0,
-  //     width: MediaQuery.of(context).size.width,
-  //     margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-  //     child: Column(
-  //       children: [
-  //         Text(
-  //           'Choose a profile picture',
-  //           style: TextStyle(
-  //             fontSize: 20.0,
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           height: 20.0,
-  //         ),
-  //         Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //           children: [
-  //             TextButton.icon(
-  //               onPressed: () {
-  //                 pickImage(ImageSource.camera);
-  //               },
-  //               icon: Icon(Icons.camera_alt),
-  //               label: Text('Camera'),
-  //             ),
-  //             TextButton.icon(
-  //               onPressed: () {
-  //                 pickImage(ImageSource.gallery);
-  //               },
-  //               icon: Icon(Icons.add_photo_alternate),
-  //               label: Text('Gallery'),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Future pickImage(ImageSource source) async {
     try {
-      print(this.image);
       final image = await ImagePicker().pickImage(source: source);
       if (image == null) return;
-      print(image);
 
       final tempPath = File(image.path);
-
-      print(tempPath);
-      print(tempPath.path);
 
       setState(() => this.image = tempPath);
     } on PlatformException catch (e) {
