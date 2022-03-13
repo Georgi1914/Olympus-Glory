@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       centerpiece(),
-                      const SizedBox(height: 10,),
+                      const SizedBox(height: 5,),
                       ElevatedButton.icon(
                         icon: const Icon(
                           Icons.reviews_outlined,

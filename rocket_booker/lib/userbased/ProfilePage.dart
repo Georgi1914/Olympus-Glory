@@ -31,10 +31,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your Profile'),
-        centerTitle: true,
-      ),
       body: Container(
           decoration: BoxDecoration(
           color: Colors.white70,
@@ -49,16 +45,16 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.symmetric(vertical: 70.0, horizontal: 30.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           ProfileImage(),
-          Divider(
+          const Divider(
             height: 60,
             thickness: 2.0,
-            color: Colors.grey[600],
+            color: Colors.white,
           ),
           SizedBox(height: 60.0),
 
           Container(
             decoration: ShapeDecoration(
-              color: Colors.white.withAlpha(2500),
+              color: Colors.white.withAlpha(200),
               shape: RoundedRectangleBorder (
                 borderRadius: BorderRadius.circular(32.0),
               )
@@ -71,6 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(width: 10.0),
                   Text(
                     '${_currentUser.displayName}',
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colors.grey[900],
                       fontSize: 22.0,
@@ -81,24 +78,25 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-          SizedBox(height: 30.0),
+          const SizedBox(height: 10.0),
           Container(
           decoration: ShapeDecoration(
-    color: Colors.white.withAlpha(2500),
+    color: Colors.white.withAlpha(200),
     shape: RoundedRectangleBorder (
     borderRadius: BorderRadius.circular(32.0),
     )
     ),
     child: Padding(
-    padding:  EdgeInsets.all(15.0),
+    padding:  const EdgeInsets.all(15.0),
     child:Row(
             children: [
-              Icon(Icons.mail_sharp),
-              SizedBox(width: 10.0),
+              const Icon(Icons.mail_sharp),
+              const SizedBox(width: 10.0),
               Text(
                 '${_currentUser.email}',
-                style: TextStyle(
-                  color: Colors.grey[900],
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.black,
                   fontSize: 22.0,
                   letterSpacing: 1.0,
                 ),
@@ -108,55 +106,72 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           ),
 
-          SizedBox(height: 30.0),
-    Container(
-    decoration: ShapeDecoration(
-    color: Colors.white.withAlpha(2500),
-    shape: RoundedRectangleBorder (
-    borderRadius: BorderRadius.circular(32.0),
-    )
-    ),
-    child: Padding(
-    padding:  EdgeInsets.all(15.0),
-    child:Row(
-            children: [
-              Icon(
-                Icons.verified,
-                color: Colors.greenAccent,
-              ),
-              SizedBox(width: 10.0),
-              Text(
-                'Your email is verified',
-                style: TextStyle(
-                  color: Colors.grey[900],
-                  fontSize: 22.0,
-                  letterSpacing: 1.0,
-                ),
-              ),
-            ],
-          ),
-    ),
-    ),
-
-          SizedBox(height: 30.0),
-          SizedBox(
+          const SizedBox(height: 10.0),
+          Container(
+            decoration: ShapeDecoration(
+              color: Colors.white.withAlpha(200),
+              shape: RoundedRectangleBorder (
+                borderRadius: BorderRadius.circular(32.0),
+              )
+            ),
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-              child: ElevatedButton(
+              padding:  EdgeInsets.all(15.0),
+              child:Row(
+                children: [
+                  const Icon(
+                    Icons.verified,
+                  ),
+                  SizedBox(width: 10.0),
+                  Text(
+                    'Your email is verified',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: Colors.grey[900],
+                      fontSize: 22.0,
+                      letterSpacing: 1.0,
+                    ),
+                  ),
+            ],
+          ),
+    ),
+    ),
+
+          Spacer(),
+          Row(
+            children:[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple[600],
+                    side: const BorderSide(width: 3, color: Colors.deepPurple),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(18)),
+                child: const Icon(
+                  Icons.arrow_back_rounded,
+                  size: 30,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Spacer(),
+              ElevatedButton(
                 onPressed: () async {
                   Authentication.signOut();
                   Navigator.popAndPushNamed(context, '/login');
                 },
                 style: ElevatedButton.styleFrom(
+                  primary: Colors.deepPurple[600],
                   minimumSize: Size(90.0, 20.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                 ),
-                child: Text("Sign out"),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text("Sign out"),
+                ),
               ),
-            ),
-          ),
+            ]),
         ]),
       ),
     ),
@@ -165,13 +180,13 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget ProfileImage() {
-    if (this.image == null) {
+    if (image == null) {
       return Center(
         child: Stack(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 60.0,
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.white,
               backgroundImage: AssetImage('assets/avatar.png'),
             ),
             Positioned(
@@ -197,7 +212,7 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             CircleAvatar(
               radius: 60.0,
-              backgroundColor: Colors.grey,
+              backgroundColor: Colors.white,
               backgroundImage: FileImage(image as File),
             ),
             Positioned(
