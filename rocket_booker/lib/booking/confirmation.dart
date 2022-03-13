@@ -145,11 +145,11 @@ class confirmationPage extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          //if (attachedFile) {
+                          if (attachedFile) {
                             addData(selectedDate);
                             setBookedtoTrue();
                             Navigator.popAndPushNamed(context, '/loading');
-                          //}
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.deepPurple,
